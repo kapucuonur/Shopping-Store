@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import SearchInput from "../components/SearchInput";
 import ProductCard from "../components/ProductCard";
@@ -20,8 +20,8 @@ const Products = () => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  // ✅ Wrap getProducts in useCallback
-  const getProducts = useCallback(async () => {
+  // Fetch products
+  const getProducts = async () => {
     setLoading(true);
     const URL = `https://dummyjson.com/products/search?q=${search}`;
 
@@ -33,11 +33,11 @@ const Products = () => {
     } finally {
       setLoading(false);
     }
-  }, [search]);
+  };
 
   useEffect(() => {
     getProducts();
-  }, [getProducts]); // ✅ Now safe!
+  }, [search, getProducts]);
 
   // Add product to cart
   const addToCart = (product) => {
@@ -72,7 +72,7 @@ const Products = () => {
           ? { ...item, quantity: item.quantity - 1 }
           : item
       )
-      .filter((item) => item.quantity > 0);
+      .filter((item) => item.quantity > 0); // Remove items with quantity 0
 
     setCart(updatedCart);
   };
@@ -81,7 +81,8 @@ const Products = () => {
   const removeFromCart = (id) => {
     const confirm = window.confirm("Remove this item from basket?");
     if (confirm) {
-      setCart((prev) => prev.filter((item) => item.id !== id));
+      const updatedCart = cart.filter((item) => item.id !== id);
+      setCart(updatedCart);
     }
   };
 
