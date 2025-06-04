@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .loginDiv {
+    background-color: #f8f9fa;
+    background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    @apply flex justify-center items-center min-h-screen;
+  }
+
+  .login-input {
+    height: 44px;
+    border-radius: 8px;
+    border: 1px solid rgba(209, 213, 219, 0.7);
+    padding: 0.6rem;
+    background: rgba(255, 255, 255, 0.9);
+    @apply focus:outline-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:caret-indigo-600;
+  }
+
+  .login-input::placeholder {
+    color: rgba(107, 114, 128, 0.6);
+    @apply font-montserrat text-sm;
+  }
+
+  .login-box::after {
+    content: "";
+    width: 4px; /* Slimmer for modern look */
+    height: 0%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    @apply bg-gradient-to-b from-indigo-500 to-purple-600;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .login-box:hover::after {
+    height: 100%;
+  }
+}

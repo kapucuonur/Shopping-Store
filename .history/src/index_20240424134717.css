@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .loginDiv {
+    background-color: #ffdee9;
+    background-image: linear-gradient(0deg, #906573 0%, #6a9b99 100%);
+    @apply flex justify-center items-center min-h-screen
+  }
+  .login-input{
+    height: 44px;
+    border-radius: 4px;
+    border: 1px solid rgba(105, 101, 130, 0.467);
+    padding: 0.6rem;
+
+    @apply focus:outline-inputColor focus:caret-main
+  }
+
+  .login-input::placeholder{
+    color: rgba(128, 128, 128, 0.472);
+    @apply font-montserrat
+  }
+  .login-box::after{
+    content: "";
+    width: 10px;
+    height: 0%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    @apply bg-main;
+    transition: all 1s ease-in-out;
+  }
+  .login-box:hover::after{
+    height: 100%;
+}
+}
